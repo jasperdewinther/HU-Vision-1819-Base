@@ -32,5 +32,6 @@ for subPathName in os.listdir(images_path):
 endTime = time.time()
 
 print(results)
+print("percentage correct faces recognised:", results.count(1)/len(results)*100)
 print("total execution time:", str(endTime-startTime), "seconds")
 print("avarage execution time:", str((endTime-startTime)/len(results)), "seconds")
