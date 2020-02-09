@@ -26,9 +26,8 @@ int main(int argc, char * argv[]) {
 
 
 	RGBImage * input = ImageFactory::newRGBImage();
-	if (!ImageIO::loadImage("D:\\Users\\Rolf\\Downloads\\TestA5.jpg", *input)) {
+	if (!ImageIO::loadImage(argv[1], *input)) {
 		std::cout << "Image could not be loaded!" << std::endl;
-		system("pause");
 		return 0;
 	}
 
@@ -45,9 +44,12 @@ int main(int argc, char * argv[]) {
 			std::cout << (i+1) << ": " << executor->facialParameters[i] << std::endl;
 		}
 	}
+	else {
+		//return details about how far the image got into the pipeline
+		return 1000 + ((executor->hasPreparedExtraction*2) + (executor->hasPreparedLocalization) * 100) + executor->features.getFeatures().size();
+	}
 
 	delete executor;
-	system("pause");
 	return 1;
 }
 
