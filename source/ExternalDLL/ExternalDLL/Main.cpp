@@ -19,8 +19,11 @@ int main(int argc, char * argv[]) {
 	//ImageFactory::setImplementation(ImageFactory::STUDENT);
 
 
-	ImageIO::debugFolder = "D:\\Users\\Rolf\\Downloads\\FaceMinMin";
-	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
+	//ImageIO::debugFolder = "D:\\Users\\Rolf\\Downloads\\FaceMinMin";
+	ImageIO::isInDebugMode = false; //If set to false the ImageIO class will skip any image save function calls
+
+
+
 
 
 
