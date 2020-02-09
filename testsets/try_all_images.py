@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 import time
+import collections
 
 exe_path = "..\source\ExternalDLL\Release\ExternalDLL.exe"
 
@@ -31,7 +32,10 @@ for subPathName in os.listdir(images_path):
 
 endTime = time.time()
 
-print(results)
+
+
+print(collections.Counter(results).keys())
+print(collections.Counter(results).values())
 print("percentage correct faces recognised:", results.count(1)/len(results)*100)
 print("total execution time:", str(endTime-startTime), "seconds")
 print("avarage execution time:", str((endTime-startTime)/len(results)), "seconds")
