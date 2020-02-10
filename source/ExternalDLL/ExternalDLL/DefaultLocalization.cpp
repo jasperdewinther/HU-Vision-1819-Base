@@ -373,7 +373,7 @@ bool DefaultLocalization::stepFindNoseEndsAndEyes(const IntensityImage &image, F
 	Point2D<double> featureExactHeadRight;
 
 
-	int OverHillOverDale = std::max(headWidth / 12, 1);
+	int OverHillOverDale = std::max(headWidth / 12, 2);
 	int ThoroughBushThoroughBrier = (int) nosePoint.getY();
 	int OverParkOverPale = image.getWidth();
 	int ThoroughFloodThoroughFire = (int) (headLeftPoint.getX() + (headWidth * 0.20));
