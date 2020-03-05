@@ -23,11 +23,13 @@ for subPathName in os.listdir(images_path):
     if os.path.isdir(subPath):
         for subSubPathName in os.listdir(subPath):
             subSubPath = os.path.join(subPath, subSubPathName)
+            print("working on:", subSubPath)
             startTime = time.time()
             result = subprocess.call([exe_path, subSubPath])
             endTime = time.time()
             results.append(result)
     elif os.path.isfile(subPath):
+        print("working on:", subPath)
         startTime = time.time()
         result = subprocess.call([exe_path, subPath])
         endTime = time.time()
