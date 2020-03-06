@@ -5,7 +5,7 @@ import time
 import collections
 import numpy as np
 
-exe_path = "..\source\ExternalDLL\Release\ExternalDLL.exe"
+exe_path = "..\\source\\ExternalDLL\\Release\\ExternalDLL.exe"
 
 os.sep = '\\'
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -19,8 +19,8 @@ timeDiff = 0
 
 for subPathName in os.listdir(images_path):
     subPath = os.path.join(images_path, subPathName)
-    batchNumber = subPath.split("/")[len(subPath.split("/"))-1]
-    results[batchNumber]
+    batchNumber = subPath.split("\\")[len(subPath.split("\\"))-1]
+    results[batchNumber] = list()
     startTime = None
     endTime = None
     if os.path.isdir(subPath):
