@@ -31,13 +31,14 @@ for subPathName in os.listdir(images_path):
             result = subprocess.call([exe_path, subSubPath])
             endTime = time.time()
             results[batchNumber].append(result)
+            timeDiff += endTime-startTime
     elif os.path.isfile(subPath):
         print("working on:", subPath)
         startTime = time.time()
         result = subprocess.call([exe_path, subPath])
         endTime = time.time()
         results[batchNumber].append(result)
-    timeDiff += endTime-startTime
+    	timeDiff += endTime-startTime
 
 try:
     goodsPerBatch = np.full(len(results), 0)
