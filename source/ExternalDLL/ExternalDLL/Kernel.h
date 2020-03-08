@@ -33,22 +33,38 @@ template <int size>
 class Kernel {
 	std::array<int, size*size> m_kernel;
 public:
-	Kernel(const std::array<int, 9> & basicKernel) {
+	constexpr Kernel(const std::array<int, 9> & basicKernel) {
 		static_assert(size == 3 || size == 9 || size == 15 || size == 21 || size == 27, "Kernel size is not correct");
-		if (basicKernel == basicKernels::Laplace || basicKernel == basicKernels::LaplaceWithDiagonal) {
-
+		for (int i = 0; i < size * size; i++) {
+			const int x = static_cast<int>(i / (size / 3)) % 3;
+			const int y = i / (size * (size / 3));
+			m_kernel[i] = basicKernel[static_cast<int>(x + (y * 3))];
 		}
-		for (int i = 0; i < size*size; i++) {
-			const int x = static_cast<int>(i/(size/3)) % 3;
-			const int y = i / (size*(size/3));
-			//std::cout << i << " : " << size << " : " << x << " : " << y << " : " << x + (y * 3) << "\n";
-			m_kernel[i] = basicKernel[static_cast<int>(x+(y*3))];
-		}
-		std::cout << "----------\n";
 	}
 
 
-	void apply(IntensityImage* in, IntensityImage* out) const {
+	void apply(const IntensityImage & in, IntensityImage* out) const {
+		for (int i = static_cast<int>(size / 2) + 1; i < in.getWidth() - static_cast<int>(size/2) - 1; i++) {
+			for (int j = static_cast<int>(size / 2) + 1; j < in.getHeight() - static_cast<int>(size / 2) - 1; j++) {
+				float kernelResult = 0;
+				for (int kernelI = 0; kernelI < size * size; kernelI++) {
+					int x = i + (kernelI%size)-static_cast<int>(size/2);
+					int y = j + static_cast<int>(kernelI/size) - static_cast<int>(size / 2);
+
+					kernelResult += in.getPixel(x, y) * m_kernel[kernelI];
+				}
+				if (kernelResult > 255) {
+					kernelResult = 255;
+				}
+				else {
+					kernelResult = 0;
+				}
+				out->setPixel(i - static_cast<int>(size / 2)+1, j - static_cast<int>(size / 2)+1, kernelResult);
+			}
+		}
+	}
+
+	void printKernel() const {
 		int counter = 0;
 		for (auto& i : m_kernel) {
 			if (counter % static_cast<int>(std::sqrt(m_kernel.size())) == 0) {
