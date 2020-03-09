@@ -44,27 +44,26 @@ public:
 	}
 
 
-	void apply(const IntensityImage & in, IntensityImage* out) const {
-		int startingPointX = static_cast<int>(size / 2);
-		int endingPointX = in.getWidth() - static_cast<int>(size / 2) - 1;
-		int startingPointY = static_cast<int>(size / 2);
-		int endingPointY = in.getHeight() - static_cast<int>(size / 2) - 1;
+	void apply(const IntensityImage & in, IntensityImage* out, const bool & absolute) const {
+		const int edgeThickness = (in.getWidth() - out->getWidth()) / 2;
+		const int startingPointX = edgeThickness;
+		const int endingPointX = in.getWidth() - edgeThickness;
+		const int startingPointY = edgeThickness;
+		const int endingPointY = in.getHeight() - edgeThickness;
 		for (int i = startingPointX; i < endingPointX; i++) {
 			for (int j = startingPointY; j < endingPointY; j++) {
 				float kernelResult = 0;
 				for (int kernelI = 0; kernelI < size * size; kernelI++) {
-					int x = i + (kernelI%size)-static_cast<int>(size/2);
-					int y = j + static_cast<int>(kernelI/size) - static_cast<int>(size / 2);
-
-					kernelResult += in.getPixel(x, y) * m_kernel[kernelI];
+					const int x = i + (kernelI%size)-static_cast<int>(size/2);
+					const int y = j + static_cast<int>(kernelI/size) - static_cast<int>(size / 2);
+					kernelResult += in.getPixel(x, y) * -m_kernel[kernelI];
 				}
-				if (kernelResult >= 255) {
-					kernelResult = 255;
+				if (absolute) {
+					kernelResult = std::abs(kernelResult);
 				}
-				else if (kernelResult <= 0){
-					kernelResult = 0;
-				}
-				out->setPixel(i - static_cast<int>(size / 2)+1, j - static_cast<int>(size / 2)+1, kernelResult);
+				kernelResult = std::max(0.f, kernelResult);
+				kernelResult = std::min(255.f, kernelResult);
+				out->setPixel(i - edgeThickness, j - edgeThickness, kernelResult);
 			}
 		}
 	}

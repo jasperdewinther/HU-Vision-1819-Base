@@ -15,7 +15,7 @@ IntensityImage * StudentPreProcessing::stepEdgeDetection(const IntensityImage &i
 	IntensityImage * newImage = new IntensityImagePrivate(image.getWidth() - size + 1, image.getHeight() - size + 1);
 	const auto basicKernel = basicKernels::Laplace;
 	const auto kernel = Kernel<size>(basicKernel);
-	kernel.apply(image, newImage);
+	kernel.apply(image, newImage, false);
 	return newImage;
 }
 
