@@ -25,6 +25,7 @@ images_path = os.path.join(dir_path, sys.argv[1])
 results = dict()
 
 timeDiff = 0
+pathsToFoundImages = list()
 
 
 for subPathName in os.listdir(images_path):
@@ -43,6 +44,8 @@ for subPathName in os.listdir(images_path):
             startTime = time.time()
             result = subprocess.call([exe_path, subSubPath])
             endTime = time.time()
+            if results == 1:
+                pathsToFoundImages.append(subSubPath)
             # append results to the correct batch
             results[batchNumber].append(result)
             timeDiff += endTime-startTime
@@ -52,6 +55,8 @@ for subPathName in os.listdir(images_path):
         startTime = time.time()
         result = subprocess.call([exe_path, subPath])
         endTime = time.time()
+        if results == 1:
+            pathsToFoundImages.append(subPath)
         # append results to the correct batch
         results[batchNumber].append(result)
         timeDiff += endTime-startTime
@@ -73,6 +78,15 @@ for key in results:
     good += results[key].count(1)
 
 totalErrors = count_matching(isError, allResults)
+
+
+print()
+print()
+print()
+print()
+print()
+for i in pathsToFoundImages:
+    print(i)
 
 
 print()
