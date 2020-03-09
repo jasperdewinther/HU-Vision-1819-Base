@@ -26,6 +26,7 @@ results = dict()
 
 timeDiff = 0
 pathsToFoundImages = list()
+counter = 0
 
 
 for subPathName in os.listdir(images_path):
@@ -37,9 +38,12 @@ for subPathName in os.listdir(images_path):
     endTime = None
     if os.path.isdir(subPath):
         for subSubPathName in os.listdir(subPath):
+            if counter % 100 == 0:
+                print("analysed", str(counter), "files,",
+                      "total time spent processing:", str(timeDiff), "seconds")
             # loop over all sub files
             subSubPath = os.path.join(subPath, subSubPathName)
-            print("working on:", subSubPath)
+            #print("working on:", subSubPath)
             # time the execution
             startTime = time.time()
             result = subprocess.call([exe_path, subSubPath])
@@ -49,8 +53,13 @@ for subPathName in os.listdir(images_path):
             # append results to the correct batch
             results[batchNumber].append(result)
             timeDiff += endTime-startTime
+
+            counter += 1
     elif os.path.isfile(subPath):
-        print("working on:", subPath)
+        if counter % 100 == 0:
+            print("analysed", str(counter), "files,",
+                  "total time spent processing:", str(timeDiff), "seconds")
+        #print("working on:", subPath)
         # time the execution
         startTime = time.time()
         result = subprocess.call([exe_path, subPath])
@@ -60,6 +69,8 @@ for subPathName in os.listdir(images_path):
         # append results to the correct batch
         results[batchNumber].append(result)
         timeDiff += endTime-startTime
+
+        counter += 1
 
 
 goodsPerBatch = np.full(len(results), 0)
