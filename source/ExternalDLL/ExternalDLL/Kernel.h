@@ -33,6 +33,7 @@ template <int size>
 class Kernel {
 	std::array<int, size*size> m_kernel;
 public:
+	//construct kernel, and scale to given size
 	constexpr Kernel(const std::array<int, 9> & basicKernel) {
 		static_assert(size == 3 || size == 9 || size == 15 || size == 21 || size == 27, "Kernel size is not correct");
 		for (int i = 0; i < size * size; i++) {
@@ -44,13 +45,16 @@ public:
 
 
 	void apply(const IntensityImage & in, IntensityImage* out) const {
-		for (int i = static_cast<int>(size / 2) + 1; i < in.getWidth() - static_cast<int>(size/2) - 1; i++) {
-			for (int j = static_cast<int>(size / 2) + 1; j < in.getHeight() - static_cast<int>(size / 2) - 1; j++) {
+		int startingPointX = static_cast<int>(size / 2);
+		int endingPointX = in.getWidth() - static_cast<int>(size / 2) - 1;
+		int startingPointY = static_cast<int>(size / 2);
+		int endingPointY = in.getHeight() - static_cast<int>(size / 2) - 1;
+		for (int i = startingPointX; i < endingPointX; i++) {
+			for (int j = startingPointY; j < endingPointY; j++) {
 				float kernelResult = 0;
 				for (int kernelI = 0; kernelI < size * size; kernelI++) {
 					int x = i + (kernelI%size)-static_cast<int>(size/2);
 					int y = j + static_cast<int>(kernelI/size) - static_cast<int>(size / 2);
-
 					kernelResult += in.getPixel(x, y) * m_kernel[kernelI];
 				}
 				if (kernelResult > 255) {
