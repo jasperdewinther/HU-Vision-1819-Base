@@ -55,12 +55,13 @@ public:
 				for (int kernelI = 0; kernelI < size * size; kernelI++) {
 					int x = i + (kernelI%size)-static_cast<int>(size/2);
 					int y = j + static_cast<int>(kernelI/size) - static_cast<int>(size / 2);
+
 					kernelResult += in.getPixel(x, y) * m_kernel[kernelI];
 				}
-				if (kernelResult > 255) {
+				if (kernelResult >= 255) {
 					kernelResult = 255;
 				}
-				else {
+				else if (kernelResult <= 0){
 					kernelResult = 0;
 				}
 				out->setPixel(i - static_cast<int>(size / 2)+1, j - static_cast<int>(size / 2)+1, kernelResult);
