@@ -15,12 +15,14 @@ bool executeSteps(DLLExecution * executor);
 
 int main(int argc, char * argv[]) {
 
+	std::cout.setstate(std::ios_base::failbit);
+
 	ImageFactory::setImplementation(ImageFactory::DEFAULT);
 	//ImageFactory::setImplementation(ImageFactory::STUDENT);
 
 
-	ImageIO::debugFolder = "debugOutput";
-	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
+	//ImageIO::debugFolder = "debugOutput";
+	ImageIO::isInDebugMode = false; //If set to false the ImageIO class will skip any image save function calls
 
 
 
