@@ -8,24 +8,24 @@
 #include <cmath>
 
 namespace basicKernels{
-	const std::array<int, 9> SobelX =				{ -1, 0, 1,
-													  -2, 0, 2,
-													  -1, 0, 1 };
-	const std::array<int, 9> SobelY =				{ -1,-2,-1, 
-													   0, 0, 0, 
-													   1, 2, 1 };
-	const std::array<int, 9> Laplace =				{  0,-1, 0,
-													  -1, 4,-1, 
-													   0,-1, 0 };
-	const std::array<int, 9> LaplaceWithDiagonal =	{ -1,-1,-1,
-													  -1, 8,-1,
-													  -1,-1,-1 };
-	const std::array<int, 9> PrewittX =				{ -1, 0, 1,
-													  -1, 0, 1,
-													  -1, 0, 1 };
-	const std::array<int, 9> PrewittY =				{ -1,-1,-1, 
-													   0, 0, 0, 
-													   1, 1, 1 };
+	const std::array<int, 9> SobelX =				{ 1, 0,-1,
+													  2, 0,-2,
+													  1, 0,-1 };
+	const std::array<int, 9> SobelY =				{ 1, 2, 1, 
+													  0, 0, 0, 
+													 -1,-2,-1 };
+	const std::array<int, 9> Laplace =				{ 0, 1, 0,
+													  1,-4, 1, 
+													  0, 1, 0 };
+	const std::array<int, 9> LaplaceWithDiagonal =	{ 1, 1, 1,
+													  1,-8, 1,
+													  1, 1, 1 };
+	const std::array<int, 9> PrewittX =				{ 1, 0,-1,
+													  1, 0,-1,
+													  1, 0,-1 };
+	const std::array<int, 9> PrewittY =				{ 1, 1, 1, 
+													  0, 0, 0, 
+													 -1,-1,-1 };
 };
 
 //only sizes 3,9,15,21,27 are allowed
@@ -54,9 +54,9 @@ public:
 			for (int j = startingPointY; j < endingPointY; j++) {
 				float kernelResult = 0;
 				for (int kernelI = 0; kernelI < size * size; kernelI++) {
-					const int x = i + (kernelI%size)-static_cast<int>(size/2);
-					const int y = j + static_cast<int>(kernelI/size) - static_cast<int>(size / 2);
-					kernelResult += in.getPixel(x, y) * -m_kernel[kernelI];
+					const int x = i + (kernelI%size)- edgeThickness;
+					const int y = j + static_cast<int>(kernelI/size) - edgeThickness;
+					kernelResult += in.getPixel(x, y) * m_kernel[kernelI];
 				}
 				if (absolute) {
 					kernelResult = std::abs(kernelResult);
