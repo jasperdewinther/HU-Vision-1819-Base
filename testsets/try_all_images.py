@@ -16,74 +16,100 @@ def isError(i):
     return i > 2000
 
 
-exe_path = "..\\source\\ExternalDLL\\Release\\ExternalDLL.exe"
+def run_analysis(exe_path, dir_name):
+    results = dict()
 
-os.sep = '\\'
-dir_path = os.path.dirname(os.path.realpath(__file__))
-images_path = os.path.join(dir_path, sys.argv[1])
+    timeDiff = 0
+    pathsToFoundImages = list()
+    counter = 0
 
-results = dict()
+    for subPathName in os.listdir(dir_name):
+        # subpath is the path to all files in the working directory
+        subPath = os.path.join(dir_name, subPathName)
+        batchNumber = subPath.split("\\")[len(subPath.split("\\"))-1]
+        results[batchNumber] = list()
+        startTime = None
+        endTime = None
+        if os.path.isdir(subPath):
+            for subSubPathName in os.listdir(subPath):
+                if counter % 100 == 0:
+                    print("analysed", str(counter), "files,",
+                          "total time spent processing:", str(timeDiff), "seconds")
+                # loop over all sub files
+                subSubPath = os.path.join(subPath, subSubPathName)
+                #print("working on:", subSubPath)
+                # time the execution
+                startTime = time.time()
+                result = subprocess.call([exe_path, subSubPath])
+                endTime = time.time()
+                if result == 1:
+                    pathsToFoundImages.append(subSubPath)
+                # append results to the correct batch
+                results[batchNumber].append(result)
+                timeDiff += endTime-startTime
 
-timeDiff = 0
-
-
-for subPathName in os.listdir(images_path):
-    # subpath is the path to all files in the working directory
-    subPath = os.path.join(images_path, subPathName)
-    batchNumber = subPath.split("\\")[len(subPath.split("\\"))-1]
-    results[batchNumber] = list()
-    startTime = None
-    endTime = None
-    if os.path.isdir(subPath):
-        for subSubPathName in os.listdir(subPath):
-            # loop over all sub files
-            subSubPath = os.path.join(subPath, subSubPathName)
-            print("working on:", subSubPath)
+                counter += 1
+        elif os.path.isfile(subPath):
+            if counter % 100 == 0:
+                print("analysed", str(counter), "files,",
+                      "total time spent processing:", str(timeDiff), "seconds")
+            #print("working on:", subPath)
             # time the execution
             startTime = time.time()
-            result = subprocess.call([exe_path, subSubPath])
+            result = subprocess.call([exe_path, subPath])
             endTime = time.time()
+            if result == 1:
+                pathsToFoundImages.append(subPath)
             # append results to the correct batch
             results[batchNumber].append(result)
             timeDiff += endTime-startTime
-    elif os.path.isfile(subPath):
-        print("working on:", subPath)
-        # time the execution
-        startTime = time.time()
-        result = subprocess.call([exe_path, subPath])
-        endTime = time.time()
-        # append results to the correct batch
-        results[batchNumber].append(result)
-        timeDiff += endTime-startTime
+
+            counter += 1
+
+    goodsPerBatch = np.full(len(results), 0)
+    errorsPerBatch = np.full(len(results), 0)
+    detected = 0
+    totalCount = 0
+    allResults = list()
+
+    # loop over every batch
+    for key in results:
+        for i in results[key]:
+            allResults.append(i)
+        goodsPerBatch[int(key)] = results[key].count(1)
+        errorsPerBatch[int(key)] = count_matching(isError, results[key])
+        totalCount += len(results[key])
+        detected += results[key].count(1)
+
+    totalErrors = count_matching(isError, allResults)
+
+    return totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages
 
 
-goodsPerBatch = np.full(len(results), 0)
-errorsPerBatch = np.full(len(results), 0)
-good = 0
-totalCount = 0
-allResults = list()
-
-# loop over every batch
-for key in results:
-    for i in results[key]:
-        allResults.append(i)
-    goodsPerBatch[int(key)] = results[key].count(1)
-    errorsPerBatch[int(key)] = count_matching(isError, results[key])
-    totalCount += len(results[key])
-    good += results[key].count(1)
-
-totalErrors = count_matching(isError, allResults)
+def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages):
+    print("--------------------results--------------------")
+    print("total images:", str(totalCount))
+    print("total faces recognised:", str(detected),
+          "percentage correct:", str(detected/totalCount*100), "%")
+    print("total errors:", str(totalErrors),
+          "error percentage:", str(totalErrors/totalCount*100), "%")
+    print("standard deviation faces found:", np.std(goodsPerBatch))
+    print("standard deviation error:", np.std(errorsPerBatch))
+    print("total execution time:", str(timeDiff), "seconds")
+    print("avarage execution time:", str(timeDiff/totalCount), "seconds")
+    print("link to images that were found:")
+    for i in pathsToFoundImages:
+        print(i)
 
 
-print()
-print()
-print("--------------------results--------------------")
-print("total images:", str(totalCount))
-print("total faces recognised:", str(good),
-      "percentage correct:", str(good/totalCount*100), "%")
-print("total errors:", str(totalErrors),
-      "error percentage:", str(totalErrors/totalCount*100), "%")
-print("standard deviation faces found:", np.std(goodsPerBatch))
-print("standard deviation error:", np.std(errorsPerBatch))
-print("total execution time:", str(timeDiff), "seconds")
-print("avarage execution time:", str(timeDiff/len(allResults)), "seconds")
+exe_path = "..\\source\\ExternalDLL\\Release\\ExternalDLL.exe"
+os.sep = '\\'
+dir_path = os.path.dirname(os.path.realpath(__file__))
+faces_path = os.path.join(dir_path, "batched_LFW_face_database")
+false_detections_path = os.path.join(dir_path, "batched_coco2017_val_250x250")
+
+faces_results = run_analysis(exe_path, faces_path)
+false_results = run_analysis(exe_path, false_detections_path)
+
+print_results("faces", *faces_results)
+print_results("false detections", *false_results)

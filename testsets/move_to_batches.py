@@ -5,7 +5,7 @@ import time
 import collections
 from shutil import copyfile
 
-os.sep = '/'
+os.sep = '\\'
 dir_path = os.path.dirname(os.path.realpath(__file__))
 images_path = os.path.join(dir_path, sys.argv[1])
 
@@ -27,18 +27,19 @@ for subPathName in os.listdir(images_path):
             if not os.path.exists(destination):
                 os.mkdir(destination)
 
-            destinationFile = os.path.join(destination, subSubPath.split('/')[len(subSubPath.split('/'))-1])
+            destinationFile = os.path.join(
+                destination, subSubPath.split('\\')[len(subSubPath.split('\\'))-1])
             print("copying:", subSubPath, "to:", destinationFile)
             copyfile(subSubPath, destinationFile)
-            counter+=1
+            counter += 1
     elif os.path.isfile(subPath):
         destination = os.path.join(output_path, str(int(counter/100)))
         if not os.path.exists(destination):
             os.mkdir(destination)
 
-        destinationFile = os.path.join(destination, subPath.split('/')[len(subPath.split('/'))-1])
-        print("copying:", subPath, "to:", destinationFile)
+        destinationFile = os.path.join(
+            destination, subPath.split('\\')[len(subPath.split('\\'))-1])
+        print("copying:", subPath, "to:",
+              destinationFile, "in folder:", destination)
         copyfile(subPath, destinationFile)
-        counter+=1
-
-
+        counter += 1
