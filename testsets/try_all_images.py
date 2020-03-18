@@ -37,10 +37,13 @@ def run_analysis(exe_path, dir_name):
                           "total time spent processing:", str(timeDiff), "seconds")
                 # loop over all sub files
                 subSubPath = os.path.join(subPath, subSubPathName)
-                #print("working on:", subSubPath)
                 # time the execution
                 startTime = time.time()
-                result = subprocess.call([exe_path, subSubPath])
+                result = None
+                try:
+                    result = subprocess.call([exe_path, subSubPath], timeout=1)
+                except subprocess.TimeoutExpired:
+                    result = 99999999
                 endTime = time.time()
                 if result == 1:
                     pathsToFoundImages.append(subSubPath)
@@ -53,10 +56,13 @@ def run_analysis(exe_path, dir_name):
             if counter % 100 == 0:
                 print("analysed", str(counter), "files,",
                       "total time spent processing:", str(timeDiff), "seconds")
-            #print("working on:", subPath)
             # time the execution
             startTime = time.time()
-            result = subprocess.call([exe_path, subPath])
+            result = None
+            try:
+                result = subprocess.call([exe_path, subPath], timeout=1)
+            except subprocess.TimeoutExpired:
+                result = 99999999
             endTime = time.time()
             if result == 1:
                 pathsToFoundImages.append(subPath)
