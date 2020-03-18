@@ -22,6 +22,7 @@ def run_analysis(exe_path, dir_name):
     timeDiff = 0
     pathsToFoundImages = list()
     counter = 0
+    times = list()
 
     for subPathName in os.listdir(dir_name):
         # subpath is the path to all files in the working directory
@@ -49,6 +50,7 @@ def run_analysis(exe_path, dir_name):
                     pathsToFoundImages.append(subSubPath)
                 # append results to the correct batch
                 results[batchNumber].append(result)
+                times.append(endTime-startTime)
                 timeDiff += endTime-startTime
 
                 counter += 1
@@ -68,6 +70,7 @@ def run_analysis(exe_path, dir_name):
                 pathsToFoundImages.append(subPath)
             # append results to the correct batch
             results[batchNumber].append(result)
+            times.append(endTime-startTime)
             timeDiff += endTime-startTime
 
             counter += 1
@@ -89,10 +92,10 @@ def run_analysis(exe_path, dir_name):
 
     totalErrors = count_matching(isError, allResults)
 
-    return totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages
+    return totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages, times
 
 
-def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages):
+def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages, times):
     print("--------------------results--------------------")
     print("total images:", str(totalCount))
     print("total faces recognised:", str(detected),
@@ -103,6 +106,7 @@ def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatc
     print("standard deviation error:", np.std(errorsPerBatch))
     print("total execution time:", str(timeDiff), "seconds")
     print("avarage execution time:", str(timeDiff/totalCount), "seconds")
+    print("standard deviation time:",  np.std(times))
     print("link to images that were found:")
     for i in pathsToFoundImages:
         print(i)
