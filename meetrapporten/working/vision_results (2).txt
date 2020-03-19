@@ -1,0 +1,354 @@
+Default:
+face:
+total images: 13200
+total faces recognised: 77 percentage correct: 0.5833333333333334 %
+total errors: 64 error percentage: 0.48484848484848486 %
+standard deviation faces found: 0.7691166387749027
+standard deviation error: 0.6683862121246297
+total execution time: 307.4874629974365 seconds
+avarage execution time: 0.02329450477253307 seconds
+standard deviation time: 0.06847575035808717
+objects:
+total images: 3266
+total faces recognised: 1 percentage correct: 0.03061849357011635 %
+total errors: 2 error percentage: 0.0612369871402327 %
+standard deviation faces found: 0.17141982574219336
+standard deviation error: 0.23860629921247914
+total execution time: 67.79902219772339 seconds
+avarage execution time: 0.020759039252211692 seconds
+standard deviation time: 0.02438753278680638
+
+SobelX 9x9:
+face:
+total images: 13200
+total faces recognised: 3 percentage correct: 0.022727272727272728 %
+total errors: 2 error percentage: 0.015151515151515152 %
+standard deviation faces found: 0.14903269373413638
+standard deviation error: 0.1221554204287659
+total execution time: 425.60606384277344 seconds
+avarage execution time: 0.03224288362445253 seconds
+standard deviation time: 0.012345362846979513
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 1 error percentage: 0.03061849357011635 %
+standard deviation faces found: 0.0
+standard deviation error: 0.17141982574219336
+total execution time: 104.33727884292603 seconds
+avarage execution time: 0.03194650301375567 seconds
+standard deviation time: 0.01702746420725567
+
+SobelX 3x3:
+Face:
+total images: 13200
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 2 error percentage: 0.015151515151515152 %
+standard deviation faces found: 0.0
+standard deviation error: 0.12215542042876588
+total execution time: 260.9569866657257 seconds
+avarage execution time: 0.019769468686797402 seconds
+standard deviation time: 0.012284837824527758
+objects:
+total images: 3266
+total faces recognised: 1 percentage correct: 0.03061849357011635 %
+total errors: 1 error percentage: 0.03061849357011635 %
+standard deviation faces found: 0.17141982574219336
+standard deviation error: 0.17141982574219336
+total execution time: 66.2794599533081 seconds
+avarage execution time: 0.020293772184111485 seconds
+standard deviation time: 0.017278504839599643
+
+SobelY 9x9:
+Face:
+total images: 13200
+total faces recognised: 97 percentage correct: 0.7348484848484849 %
+total errors: 41 error percentage: 0.3106060606060606 %
+standard deviation faces found: 0.8691675613887299
+standard deviation error: 0.5790872619329198
+total execution time: 471.87065029144287 seconds
+avarage execution time: 0.03574777653723052 seconds
+standard deviation time: 0.054149123903857004
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 10 error percentage: 0.3061849357011635 %
+standard deviation faces found: 0.0
+standard deviation error: 0.5765544724375894
+total execution time: 116.74502944946289 seconds
+avarage execution time: 0.035745569335414236 seconds
+standard deviation time: 0.05368923201386542
+
+SobelY 3x3:
+face:
+total images: 13200
+total faces recognised: 3 percentage correct: 0.022727272727272728 %
+total errors: 9 error percentage: 0.06818181818181819 %
+standard deviation faces found: 0.14903269373413638
+standard deviation error: 0.25205764787294127
+total execution time: 270.110143661499 seconds
+avarage execution time: 0.020462889671325684 seconds
+standard deviation time: 0.02571668116821761
+objects:
+total images: 3266
+total faces recognised: 1 percentage correct: 0.03061849357011635 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.17141982574219336
+standard deviation error: 0.0
+total execution time: 68.32065296173096 seconds
+avarage execution time: 0.0209187547341491 seconds
+standard deviation time: 0.0017685767723149865
+
+SobelX + SobelY 9x9:
+face:
+total images: 13200
+total faces recognised: 1 percentage correct: 0.007575757575757576 %
+total errors: 4 error percentage: 0.030303030303030304 %
+standard deviation faces found: 0.08670850865348179
+standard deviation error: 0.17141982574219333
+total execution time: 630.5598151683807 seconds
+avarage execution time: 0.04776968296730157 seconds
+standard deviation time: 0.016842222806643613
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 4 error percentage: 0.1224739742804654 %
+standard deviation faces found: 0.0
+standard deviation error: 0.40881022918884974
+total execution time: 162.93173575401306 seconds
+avarage execution time: 0.04988724303552145 seconds
+standard deviation time: 0.03349908920006047
+
+SobelX + SobelY 3x3:
+faces:
+total images: 13200
+total faces recognised: 10 percentage correct: 0.07575757575757576 %
+total errors: 14 error percentage: 0.10606060606060608 %
+standard deviation faces found: 0.2646098363117118
+standard deviation error: 0.3079151732257814
+total execution time: 297.4370849132538 seconds
+avarage execution time: 0.022533112493428317 seconds
+standard deviation time: 0.03200763500320028
+objects:
+total images: 3266
+total faces recognised: 2 percentage correct: 0.0612369871402327 %
+total errors: 10 error percentage: 0.3061849357011635 %
+standard deviation faces found: 0.2386062992124791
+standard deviation error: 0.5765544724375894
+total execution time: 80.0045177936554 seconds
+avarage execution time: 0.024496178136452967 seconds
+standard deviation time: 0.05434744915163598
+
+
+Laplace 9x9:
+face:
+total images: 13200
+total faces recognised: 76 percentage correct: 0.5757575757575757 %
+total errors: 62 error percentage: 0.46969696969696967 %
+standard deviation faces found: 0.7397912494384062
+standard deviation error: 0.7327758963238634
+total execution time: 473.80032110214233 seconds
+avarage execution time: 0.03589396371985927 seconds
+standard deviation time: 0.06652017017765975
+objects:
+total images: 3266
+total faces recognised: 4 percentage correct: 0.1224739742804654 %
+total errors: 2 error percentage: 0.0612369871402327 %
+standard deviation faces found: 0.40881022918884974
+standard deviation error: 0.2386062992124791
+total execution time: 105.72734069824219 seconds
+avarage execution time: 0.032372119013546294 seconds
+standard deviation time: 0.024063588018769618
+
+Laplace 3x3:
+face:
+total images: 13200
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.0
+standard deviation error: 0.0
+total execution time: 252.46352529525757 seconds
+avarage execution time: 0.019126024643580118 seconds
+standard deviation time: 0.0007727103682530807
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.0
+standard deviation error: 0.0
+total execution time: 64.02390813827515 seconds
+avarage execution time: 0.019603156196654974 seconds
+standard deviation time: 0.0007652529175353373
+
+laplace + diagonal 9x9:
+face:
+total images: 13200
+total faces recognised: 17 percentage correct: 0.12878787878787878 %
+total errors: 39 error percentage: 0.29545454545454547 %
+standard deviation faces found: 0.35686562767617813
+standard deviation error: 0.5184276397250189
+total execution time: 460.4399733543396 seconds
+avarage execution time: 0.03488181616320755 seconds
+standard deviation time: 0.052799198984391824
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 1 error percentage: 0.03061849357011635 %
+standard deviation faces found: 0.0
+standard deviation error: 0.17141982574219336
+total execution time: 110.05131435394287 seconds
+avarage execution time: 0.03369605460929053 seconds
+standard deviation time: 0.017078995091410434
+
+laplace + diagonal 9x9:
+face:
+total images: 13200
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.0
+standard deviation error: 0.0
+total execution time: 260.85816168785095 seconds
+avarage execution time: 0.019761981946049313 seconds
+standard deviation time: 0.0011672265913965079
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.0
+standard deviation error: 0.0
+total execution time: 66.07362818717957 seconds
+avarage execution time: 0.02023074959803416 seconds
+standard deviation time: 0.0015634071656936157
+
+PrewittX 9x9:
+face:
+total images: 13200
+total faces recognised: 12 percentage correct: 0.09090909090909091 %
+total errors: 1 error percentage: 0.007575757575757576 %
+standard deviation faces found: 0.31272374909924683
+standard deviation error: 0.08670850865348179
+total execution time: 421.8282833099365 seconds
+avarage execution time: 0.031956688129540646 seconds
+standard deviation time: 0.008662588456308785
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 1 error percentage: 0.03061849357011635 %
+standard deviation faces found: 0.0
+standard deviation error: 0.17141982574219336
+total execution time: 109.76204681396484 seconds
+avarage execution time: 0.033607485246161924 seconds
+standard deviation time: 0.017085195387600487
+
+PrewittX 3x3:
+face:
+total images: 13200
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.0
+standard deviation error: 0.0
+total execution time: 258.26356077194214 seconds
+avarage execution time: 0.019565421270601676 seconds
+standard deviation time: 0.0011451047338674235
+objects:
+total images: 3266
+total faces recognised: 1 percentage correct: 0.03061849357011635 %
+total errors: 1 error percentage: 0.03061849357011635 %
+standard deviation faces found: 0.17141982574219336
+standard deviation error: 0.17141982574219336
+total execution time: 67.03598546981812 seconds
+avarage execution time: 0.02052540890074039 seconds
+standard deviation time: 0.01722764821350512
+
+PrewittY 9x9:
+face:
+total images: 13200
+total faces recognised: 106 percentage correct: 0.803030303030303 %
+total errors: 65 error percentage: 0.4924242424242424 %
+standard deviation faces found: 0.8388248809494795
+standard deviation error: 0.7016885707501553
+total execution time: 481.5143404006958 seconds
+avarage execution time: 0.03647835912126483 seconds
+standard deviation time: 0.06810106475870314
+objects:
+total images: 3266
+total faces recognised: 4 percentage correct: 0.1224739742804654 %
+total errors: 11 error percentage: 0.3368034292712799 %
+standard deviation faces found: 0.40881022918884974
+standard deviation error: 0.5318160234783105
+total execution time: 117.25971364974976 seconds
+avarage execution time: 0.03590315788418547 seconds
+standard deviation time: 0.05632220032212501
+
+PrewittY 3x3:
+face:
+total images: 13200
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 2 error percentage: 0.015151515151515152 %
+standard deviation faces found: 0.0
+standard deviation error: 0.12215542042876588
+total execution time: 254.5240330696106 seconds
+avarage execution time: 0.019282123717394743 seconds
+standard deviation time: 0.012171707825722777
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 0 error percentage: 0.0 %
+standard deviation faces found: 0.0
+standard deviation error: 0.0
+total execution time: 63.95665168762207 seconds
+avarage execution time: 0.019582563284636274 seconds
+standard deviation time: 0.0008370432692794104
+
+PrewittX + PrewittY 9x9:
+face:
+total images: 13200
+total faces recognised: 3 percentage correct: 0.022727272727272728 %
+total errors: 4 error percentage: 0.030303030303030304 %
+standard deviation faces found: 0.14903269373413638
+standard deviation error: 0.17141982574219336
+total execution time: 625.6599745750427 seconds
+avarage execution time: 0.04739848292235172 seconds
+standard deviation time: 0.016849336014669467
+objects:
+total images: 3266
+total faces recognised: 0 percentage correct: 0.0 %
+total errors: 1 error percentage: 0.03061849357011635 %
+standard deviation faces found: 0.0
+standard deviation error: 0.17141982574219336
+total execution time: 158.76921248435974 seconds
+avarage execution time: 0.048612741115848054 seconds
+standard deviation time: 0.017007295748632665
+
+PrewittX + PrewittY 3x3:
+face:
+total images: 13200
+total faces recognised: 2 percentage correct: 0.015151515151515152 %
+total errors: 5 error percentage: 0.03787878787878788 %
+standard deviation faces found: 0.12215542042876588
+standard deviation error: 0.19090307830839626
+total execution time: 291.36936020851135 seconds
+avarage execution time: 0.022073436379432678 seconds
+standard deviation time: 0.019181201261765844
+objects:
+total images: 3266
+total faces recognised: 3 percentage correct: 0.09185548071034905 %
+total errors: 4 error percentage: 0.1224739742804654 %
+standard deviation faces found: 0.28747978728803447
+standard deviation error: 0.40881022918884974
+total execution time: 77.03215551376343 seconds
+avarage execution time: 0.023586085582903683 seconds
+standard deviation time: 0.03434739375609836
+
+
+
+
+
+
+
+
+
+
+
+
+
+
