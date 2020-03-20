@@ -34,7 +34,7 @@ class Kernel {
 	std::array<int, size*size> m_kernel;
 public:
 	//construct kernel, and scale to given size
-	constexpr Kernel(const std::array<int, 9> & basicKernel) {
+	const Kernel(const std::array<int, 9> & basicKernel) {
 		static_assert(size == 3 || size == 9 || size == 15 || size == 21 || size == 27, "Kernel size is not correct");
 		for (int i = 0; i < size * size; i++) {
 			const int x = static_cast<int>(i / (size / 3)) % 3;
