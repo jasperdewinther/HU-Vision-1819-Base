@@ -22,6 +22,7 @@ def run_analysis(exe_path, dir_name):
     timeDiff = 0
     pathsToFoundImages = list()
     counter = 0
+    times = list()
 
     for subPathName in os.listdir(dir_name):
         # subpath is the path to all files in the working directory
@@ -37,15 +38,19 @@ def run_analysis(exe_path, dir_name):
                           "total time spent processing:", str(timeDiff), "seconds")
                 # loop over all sub files
                 subSubPath = os.path.join(subPath, subSubPathName)
-                #print("working on:", subSubPath)
                 # time the execution
                 startTime = time.time()
-                result = subprocess.call([exe_path, subSubPath])
+                result = None
+                try:
+                    result = subprocess.call([exe_path, subSubPath], timeout=1)
+                except subprocess.TimeoutExpired:
+                    result = 99999999
                 endTime = time.time()
                 if result == 1:
                     pathsToFoundImages.append(subSubPath)
                 # append results to the correct batch
                 results[batchNumber].append(result)
+                times.append(endTime-startTime)
                 timeDiff += endTime-startTime
 
                 counter += 1
@@ -53,15 +58,19 @@ def run_analysis(exe_path, dir_name):
             if counter % 100 == 0:
                 print("analysed", str(counter), "files,",
                       "total time spent processing:", str(timeDiff), "seconds")
-            #print("working on:", subPath)
             # time the execution
             startTime = time.time()
-            result = subprocess.call([exe_path, subPath])
+            result = None
+            try:
+                result = subprocess.call([exe_path, subPath], timeout=1)
+            except subprocess.TimeoutExpired:
+                result = 99999999
             endTime = time.time()
             if result == 1:
                 pathsToFoundImages.append(subPath)
             # append results to the correct batch
             results[batchNumber].append(result)
+            times.append(endTime-startTime)
             timeDiff += endTime-startTime
 
             counter += 1
@@ -83,10 +92,10 @@ def run_analysis(exe_path, dir_name):
 
     totalErrors = count_matching(isError, allResults)
 
-    return totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages
+    return totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages, times
 
 
-def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages):
+def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatch, errorsPerBatch, timeDiff, pathsToFoundImages, times):
     print("--------------------results--------------------")
     print("total images:", str(totalCount))
     print("total faces recognised:", str(detected),
@@ -97,6 +106,7 @@ def print_results(analysis_name, totalCount, detected, totalErrors, goodsPerBatc
     print("standard deviation error:", np.std(errorsPerBatch))
     print("total execution time:", str(timeDiff), "seconds")
     print("avarage execution time:", str(timeDiff/totalCount), "seconds")
+    print("standard deviation time:",  np.std(times))
     print("link to images that were found:")
     for i in pathsToFoundImages:
         print(i)
