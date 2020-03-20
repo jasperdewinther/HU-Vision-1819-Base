@@ -199,7 +199,7 @@ total execution time: 110.05131435394287 seconds
 avarage execution time: 0.03369605460929053 seconds
 standard deviation time: 0.017078995091410434
 
-laplace + diagonal 9x9:
+laplace + diagonal 3x3:
 face:
 total images: 13200
 total faces recognised: 0 percentage correct: 0.0 %
