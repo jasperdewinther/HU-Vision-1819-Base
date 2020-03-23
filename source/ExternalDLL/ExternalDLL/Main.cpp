@@ -15,11 +15,13 @@ bool executeSteps(DLLExecution * executor);
 
 int main(int argc, char * argv[]) {
 
+	std::cout.setstate(std::ios_base::failbit);
+
 	ImageFactory::setImplementation(ImageFactory::DEFAULT);
 	//ImageFactory::setImplementation(ImageFactory::STUDENT);
 
 
-	//ImageIO::debugFolder = "D:\\Users\\Rolf\\Downloads\\FaceMinMin";
+	//ImageIO::debugFolder = "debugOutput";
 	ImageIO::isInDebugMode = false; //If set to false the ImageIO class will skip any image save function calls
 
 
@@ -79,7 +81,7 @@ bool executeSteps(DLLExecution * executor) {
 	}
 	ImageIO::saveIntensityImage(*executor->resultPreProcessingStep2, ImageIO::getDebugFileName("Pre-processing-2.png"));
 
-	if (!executor->executePreProcessingStep3(false)) {
+	if (!executor->executePreProcessingStep3(true)) {
 		std::cout << "Pre-processing step 3 failed!" << std::endl;
 		return false;
 	}
